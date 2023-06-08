@@ -8,6 +8,7 @@ $(document).ready(function(){
         fetch(url)
             .then(resp => resp.json())
             .then(movies => {
+                console.log(movies)
                 movieArray = movies;
                 let htmlStr = "";
                 let html = "";
@@ -158,6 +159,10 @@ $(document).ready(function(){
             .then(resp => resp.json())
             .then(moviePosters).catch(error => console.log(error))
     });
+
+    // fetch(`https://api.themoviedb.org/3/authentication&appid=${MPK}`)
+    //     .then(data => data.json())
+    //     .then(data => console.log(data))
 
     //end of document ready
 });
