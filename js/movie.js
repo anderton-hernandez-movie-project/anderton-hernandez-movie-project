@@ -3,7 +3,7 @@ $(document).ready(function(){
     let movieArray = [];
     let url = "https://mahogany-dynamic-lip.glitch.me/movies";
     const moviePosters = () => {
-        let loader = `<div class="loading"><img src="img/loading.gif"></div>`;
+        let loader = `<div class="loading posters"><img src="img/loading.gif"></div>`;
         $("#container").html(loader);
         fetch(url)
             .then(resp => resp.json())
