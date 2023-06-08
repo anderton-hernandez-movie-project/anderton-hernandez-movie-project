@@ -119,7 +119,7 @@ i {
     padding-top: 5px;
 }
 a:hover {
-    color: cadetblue;
+    color: #0b4d50;
 }
 .gradient-border {
     --borderWidth: 3px;
@@ -135,7 +135,7 @@ a:hover {
     left: calc(-1 * var(--borderWidth));
     height: calc(100% + var(--borderWidth) * 2);
     width: calc(100% + var(--borderWidth) * 2);
-    background: linear-gradient(60deg, #4b2d0b, #6c2719, #4d0d1f, #41054b, #5073b8, #1098ad, #07b39b, #6fba82);
+    background: linear-gradient(60deg, #4b2d0b, #6c2719, #4d0d1f, #41054b, #132b59, #074a56, #075247, #106925);
     border-radius: calc(2 * var(--borderWidth));
     z-index: -1;
     animation: animatedgradient 3s ease alternate infinite;
