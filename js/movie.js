@@ -32,15 +32,17 @@ $(document).ready(function(){
 
         //creates movie posters
         htmlStr = `<div class="posters grow gradient-border"><div>`
-        htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><div id="image-container${iterator}"></div>`;
-        htmlStr += `<div class="underImgContainer"><div class="rating">${createStars(movie)}</div><div class="director">By: ${movie.director}</div></div>`;
+        htmlStr += `<h1 class="title">${movie.title}</h1>`
+        htmlStr += `<div class="genre">${movie.genre}</div><div id="image-container${iterator}"></div>`;
+        htmlStr += `<div class="underImgContainer"><div class="rating">${createStars(movie)}</div>`
+        htmlStr += `<div class="director">By: ${movie.director}</div></div>`;
         htmlStr += `<div class="description">${movie.plot}</div>`;
         htmlStr += `</div></div>`;
+
         //pushes created card or dropdown menu to the screen
         $("#container").append(htmlStr);
         $("#selectMenu").append(html);
         $("#selectMenu2").append(html);
-
     }
 
     //========Show the edit menu========\\
@@ -83,7 +85,8 @@ $(document).ready(function(){
     $("#newMovie").click(function() {
         $("#postMovie").toggleClass("hidden1");
     })
-    //=========Close menu if open==========\\
+
+    //=========Closes menu if open==========\\
     const isOpen = $id => {
         if (!$id.hasClass(`hidden1`)) {
             $id.toggleClass("hidden1");
