@@ -20,11 +20,11 @@ $(document).ready(function(){
 
                     //creates movie posters
                     htmlStr += `<div class="posters grow gradient-border"><div>`
-                    htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><div id="image-container${i++}"></div>`;
+                    htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><div id="image-container${i}"></div>`;
                     htmlStr += `<div class="underImgContainer"><div class="rating">${createStars(movie)}</div><div class="director">By: ${movie.director}</div></div>`;
                     htmlStr += `<div class="description">${movie.plot}</div>`;
                     htmlStr += `</div></div>`;
-                    getPoster(movie.title)
+                    getPoster(movie.title, i++)
                 }
 
                 //pushes created card or dropdown menu to the screen
@@ -170,13 +170,12 @@ $(document).ready(function(){
         }
     };
 
-    const getPoster = (movie) => {
+    const getPoster = (movie, iterator) => {
         fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`, options)
             .then(response => response.json())
             .then(response => {
                 console.log(response)
-                let i = 0;
-                response.results.forEach(function (item) {
+                response.results.every(function (item) {
                     let dBTitle = item.title.toLowerCase();
                     let mTitle = movie.toLowerCase();
                     console.log(mTitle, dBTitle)
@@ -190,8 +189,9 @@ $(document).ready(function(){
                             src: url,
                             alt: 'Movie poster',
                             class: 'movie-posters'
-                        });
-                        img.appendTo($(`#image-container${i++}`));
+                        })
+                        img.appendTo($(`#image-container${iterator}`));
+                        return false;
                     }
                 })
             })
