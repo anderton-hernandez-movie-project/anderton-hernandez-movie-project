@@ -14,6 +14,7 @@ $(document).ready(function () {
 				$("#selectMenu").html("<option value='-1' selected>Select a movie</option>");
 				$("#selectMenu2").html("<option value='-1' selected>Select a movie</option>");
 				for (let movie of movies) {
+					console.log(`${url/movie.title}`)
 					let i = movie.id;
 					renderMovies(movie, i);
 					getPoster(movie.title, i);
@@ -85,7 +86,6 @@ $(document).ready(function () {
 
 	//=========Closes menu if open==========\\
 	const isOpen = $id => {
-		console.log($id.hasClass(`hidden1`))
 		if (!$id.hasClass(`hidden1`)) {
 			$id.toggleClass("hidden1");
 		}
@@ -154,7 +154,6 @@ $(document).ready(function () {
 
 	$("#selectMenu2").change(function () {
 		let inputVal = $(this).val();
-		console.log("hello: " + inputVal);
 		$("#delete-movie").click(function () {
 			//DELETE request
 			fetch(`${url}/${inputVal}`, deleteOptions)
@@ -167,7 +166,7 @@ $(document).ready(function () {
 	$('#newMovie').click((e) => {
 		e.preventDefault();
 
-		var addMovie = {
+		let addMovie = {
 			title: $("#title").val(),
 			genre: $("#genre").val(),
 			rating: $("#rating").val(),
