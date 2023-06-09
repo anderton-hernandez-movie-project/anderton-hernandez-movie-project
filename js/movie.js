@@ -11,6 +11,7 @@ $(document).ready(function(){
         fetch(url)
             .then(resp => resp.json())
             .then(movies => {
+                movieArray = movies;
                 for (let movie of movies) {
                     let i = movie.id;
                     renderMovies(movie, i);
@@ -93,7 +94,7 @@ $(document).ready(function(){
 
         //grab info from the json file and populate the input fields
         for (let movie of movieArray) {
-            if (movie.id == target) {
+            if (movie.id === target) {
                 $("#newTitle").val(movie.title);
                 $("#newGenre").val(movie.genre);
                 $("#newRating").val(movie.rating);
