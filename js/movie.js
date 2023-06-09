@@ -11,10 +11,10 @@ $(document).ready(function(){
         fetch(url)
             .then(resp => resp.json())
             .then(movies => {
-                let i = 0;
                 for (let movie of movies) {
+                    let i = movie.id;
                     renderMovies(movie, i);
-                    getPoster(movie.title, i++);
+                    getPoster(movie.title, i);
                 }
                 $(`.loading`).remove()
             });
@@ -25,7 +25,7 @@ $(document).ready(function(){
     //============Renders HtML from fetch===========\\
     const renderMovies = (movie, iterator) => {
         //creates the dropdown menus for select
-        html = `<option value=${movie.id}>${movie.title}</option>`;
+        html = `<option value=${iterator}>${movie.title}</option>`;
 
         //creates movie posters
         htmlStr = `<div class="posters grow gradient-border"><div>`
