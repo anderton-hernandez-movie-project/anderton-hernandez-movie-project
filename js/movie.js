@@ -12,6 +12,8 @@ $(document).ready(function(){
             .then(resp => resp.json())
             .then(movies => {
                 movieArray = movies;
+                $("#selectMenu").html("<option value='-1' selected>Select a movie</option>");
+                $("#selectMenu2").html("<option value='-1' selected>Select a movie</option>");
                 for (let movie of movies) {
                     let i = movie.id;
                     renderMovies(movie, i);
@@ -36,8 +38,9 @@ $(document).ready(function(){
         htmlStr += `</div></div>`;
         //pushes created card or dropdown menu to the screen
         $("#container").append(htmlStr);
-        $("#selectMenu").append("<option value='-1' selected>Select a movie</option>" + html);
-        $("#selectMenu2").append("<option value='-1' selected>Select a movie</option>" + html);
+        $("#selectMenu").append(html);
+        $("#selectMenu2").append(html);
+
     }
 
     //========Show the edit menu========\\
