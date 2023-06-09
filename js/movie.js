@@ -12,6 +12,7 @@ $(document).ready(function(){
                 movieArray = movies;
                 let htmlStr = "";
                 let html = "";
+                let i = 0;
                 for (let movie of movies) {
 
                     //creates the dropdown menus for select
@@ -19,10 +20,11 @@ $(document).ready(function(){
 
                     //creates movie posters
                     htmlStr += `<div class="posters grow gradient-border"><div>`
-                    htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><img src=${movie.poster}>`;
+                    htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><div id="image-container${i++}"></div>`;
                     htmlStr += `<div class="underImgContainer"><div class="rating">${createStars(movie)}</div><div class="director">By: ${movie.director}</div></div>`;
                     htmlStr += `<div class="description">${movie.plot}</div>`;
                     htmlStr += `</div></div>`;
+                    getPoster(movie.title)
                 }
 
                 //pushes created card or dropdown menu to the screen
@@ -159,6 +161,42 @@ $(document).ready(function(){
             .then(resp => resp.json())
             .then(moviePosters).catch(error => console.log(error))
     });
+
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDdiYjg3NzZjMGRkMDQwZjRlNDgyZWI2NTczNTQ4NCIsInN1YiI6IjY0ODIyNWM1NjQ3NjU0MDEwNWMwNTkyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.siL7ZDqKl5__RHhDDo0Z418nSgWn4N1VlpQx2TnHVcY'
+        }
+    };
+
+    const getPoster = (movie) => {
+        fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`, options)
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+                let i = 0;
+                response.results.forEach(function (item) {
+                    let dBTitle = item.title.toLowerCase();
+                    let mTitle = movie.toLowerCase();
+                    console.log(mTitle, dBTitle)
+                    if (mTitle === dBTitle && item.poster_path !== null) {
+                        console.log(item.title)
+                        console.log(`here`)
+                        let posterPath = item.poster_path
+                        let url = `https://image.tmdb.org/t/p/w500${posterPath}`
+                        console.log(`here`)
+                        var img = $('<img/>', {
+                            src: url,
+                            alt: 'Movie poster',
+                            class: 'movie-posters'
+                        });
+                        img.appendTo($(`#image-container${i++}`));
+                    }
+                })
+            })
+                        .catch(err => console.error(err));
+}
 
     // fetch(`https://api.themoviedb.org/3/authentication&appid=${MPK}`)
     //     .then(data => data.json())
